@@ -1,0 +1,43 @@
+body{
+    font-size: 16px;
+    font-family: 'Courier New', Courier, monospace;
+}
+.centr-pos{
+    width: 800px;
+    margin: 0 auto;
+}
+.flex-row{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: row;
+}
+.search-string{
+
+    height: 20px;    
+    width: 500px;
+    background-color: #a9a9a96b;
+    border: 3px solid black;
+    border-radius: 5px;
+}
+.btn-search{
+    margin-left: 20px;
+    height: 30px;
+    width: 70px;
+    border-radius: 5px;
+    background-color: #f12fa6;
+}
+.choose-panel{
+   
+    display: flex;
+    flex-direction: column;
+    width: 500px;
+    max-height: 190px;
+    border-radius: 5px;
+    overflow: hidden;
+    
+}
+.item-for-choose{
+    color: blue;
+    background-color: #92ca9d45;
+    width: 510px;
+}
