@@ -24,24 +24,32 @@ function init(){
         
 
         
-           let panel  = document.querySelector(".panel2");
+           let panel  = document.querySelector(".panel");
             destroyChildren(panel);
-     /*       if (document.querySelector(".choose-panel"))
-                document.querySelector(".choose-panel").remove;
-                */
-           let choose_panel =  document.createElement("div");
-            choose_panel.className = "choose-panel";
             for (let j = 0; j < arr_chosen_words.length; j++) {
                 let new_item_on_search_list = document.createElement("div");
                 new_item_on_search_list.className = "item-for-choose";
                 new_item_on_search_list.textContent = arr_chosen_words[j];
-                choose_panel.appendChild(new_item_on_search_list);
+                new_item_on_search_list.addEventListener('dblclick', function(e){
+                    let list = document.querySelector(".list-choise");
+                    let newItemList  = document.createElement("li") ;
+                    newItemList.className = "item-choise";
+                    newItemList.textContent =  new_item_on_search_list.textContent;
+                    list.appendChild(newItemList);
+                });
+                panel.appendChild(new_item_on_search_list);
             }
             console.log(arr_chosen_words);
-            panel.appendChild(choose_panel);
 
     });
-       
+    
+    function addOnChoice(val){
+        let list = document.querySelector(".list-choise");
+        let newItemList  = document.createElement("li") ;
+        newItemList.className = "item-choise";
+        newItemList.textContent = val;
+        list.appendChild(newItemList);
+    }
 
     function searchInVocabulary(value){
         arr_chosen_words = [];
