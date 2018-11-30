@@ -4,57 +4,42 @@ const vocabulary = [
     "азбука", "алфавит", "арбуз", "аэропорт","багаж","батарея","вагон ","газета",
     "девочка","жаворонок","изваяние","кабина ","кабинет ","каблук","кавалерия","казарма","капитал ","мавзолей","назад","обаяние ","павильон"];
 
-
-    var arr_chosen_words = [];
+var arr_chosen_words = [];
 
 function init(){
-    
+    let search_string = document.querySelector(".search-string");
+    search_string.addEventListener('keyup', filterWordsForChoice);
 
-    let serch_string = document.querySelector(".search-string");
     let btn = document.querySelector(".btn-search");
     btn.addEventListener('click', function (e) {
         event.preventDefault();
-        open(`https://www.google.com/search?q=${serch_string.value}&btnI`);
+        open(`https://www.google.com/search?q=${search_string.value}&btnI`);
     })
+
     let panel  = document.querySelector(".panel");
-          
-    serch_string.addEventListener('keyup', function(e) {
-            let val_for_search = serch_string.value;;
-            console.log(val_for_search);          
+    panel.addEventListener('dblclick', addOnChoice);    
+};
 
-            searchInVocabulary(val_for_search);        
+function filterWordsForChoice(){
+    let search_string = document.querySelector(".search-string");
+    let val_for_search = search_string.value;             
 
-        
-            destroyChildren(panel);
-            for (let j = 0; j < arr_chosen_words.length; j++) {
-                let new_item_on_search_list = document.createElement("div");
-                new_item_on_search_list.className = "item-for-choose";
-                new_item_on_search_list.textContent = arr_chosen_words[j];
+    searchInVocabulary(val_for_search);       
 
-               new_item_on_search_list.addEventListener('dblclick', function(e){
-                    let list = document.querySelector(".list-choise");
-                    let newItemList  = document.createElement("li") ;
-                    newItemList.className = "item-choise";
-                    newItemList.textContent =  new_item_on_search_list.textContent;
-                    list.appendChild(newItemList);
-                });
-                panel.appendChild(new_item_on_search_list);
-            }
-            console.log(arr_chosen_words);
+    let panel  = document.querySelector(".panel");
+    destroyChildren(panel);
 
-          
-    });
-  //  panel.addEventListener('dbclick', addOnChoice);
-    
-}
+    for (let j = 0; j < arr_chosen_words.length; j++) {
+        let new_item_on_search_list = document.createElement("div");
+        new_item_on_search_list.className = "item-for-choose";
+        new_item_on_search_list.textContent = arr_chosen_words[j];
+        panel.appendChild(new_item_on_search_list);
+    }   
+};
 
-
-function addOnChoice(){
-    let listWords = [...document.querySelectorAll(".item-for-choose")];
-    
-    let  i = listWords.indexOf(e.target);
-    console.log(i);
-    console.log(listWords.length + " length");
+function addOnChoice(e){
+    let listWords = [...document.querySelectorAll(".item-for-choose")];    
+    let  i = listWords.indexOf(e.target);   
     let list = document.querySelector(".list-choise");
     let newItemList  = document.createElement("li") ;
     newItemList.className = "item-choise";
@@ -68,11 +53,11 @@ function searchInVocabulary(value){
         if (vocabulary[i].includes(value)){
             arr_chosen_words.push(vocabulary[i]); 
         }
-        
     }    
 };
+
 function destroyChildren(node)
 {
     while (node.firstChild)
         node.removeChild(node.firstChild);
-} 
+};
